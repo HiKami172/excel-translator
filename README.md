@@ -12,7 +12,7 @@ pip install -r requirements.txt
 ## Usage
 To use the script, run the following command in your terminal:
 ```shell
-excel_translator.py translate_column FILEPATH COLUMN_NAME NEW_COLUMN_NAME AUTH_KEY TARGET_LANGUAGE
+python excel_translator.py translate_column FILEPATH COLUMN_NAME NEW_COLUMN_NAME AUTH_KEY TARGET_LANGUAGE
 ```
 Where:
 
