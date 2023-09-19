@@ -14,13 +14,14 @@ To use the script, run the following command in your terminal:
 ```shell
 python excel_translator.py translate_column FILEPATH COLUMN_NAME NEW_COLUMN_NAME AUTH_KEY TARGET_LANGUAGE
 ```
-Where:
+| Argument          | Description                                                                                      |
+|-------------------|--------------------------------------------------------------------------------------------------|
+| `FILEPATH`        | Path to the Excel file.                                                                          |
+| `COLUMN_NAME`     | Name of the column to translate.                                                                 |
+| `NEW_COLUMN_NAME` | Name of the new column with translations.                                                        |
+| `AUTH_KEY`        | Deepl API key. Can be found at https://www.deepl.com/ru/account/summary/                         |
+| `TARGET_LANGUAGE` | Deepl code of the target language. Can be found at https://www.deepl.com/docs-api/translate-text |
 
-- `FILEPATH` is the path to the Excel file you want to translate.
-- `COLUMN_NAME` is the name of the column in the Excel file that you want to translate.
-- `NEW_COLUMN_NAME` is the name for the new column where the translated text will be stored.
-- `AUTH_KEY` is your authentication key for deepl API.
-- `TARGET_LANGUAGE` is the deepl code of target language.
 
 ### Optional Flags
 
