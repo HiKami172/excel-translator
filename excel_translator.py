@@ -20,26 +20,26 @@ def save_to_file(save_path, df):
 
 ########################################################################################################################
 
-def translate_column(file, name, new_name, auth_key, target, outfile=None):
+def translate_column(filepath, column_name, new_column_name, auth_key, target_language, outfile=None):
     if not outfile:
-        outfile = file
+        outfile = filepath
 
-    df = pd.read_excel(file)
+    df = pd.read_excel(filepath)
     print(df.head())
-    words = list(df[name].astype(str).unique())
+    words = list(df[column_name].astype(str).unique())
     print(f"unique words: {len(words)}")
 
     translate_function = partial(
         translate_text,
         auth_key=auth_key,
-        target_language=target,
+        target_language=target_language,
     )
 
     with ThreadPoolExecutor(max_workers=100) as executor:
         results = list(executor.map(translate_function, words))
 
     translations = dict(zip(words, results))
-    df[new_name] = df[name].map(translations)
+    df[new_column_name] = df[column_name].map(translations)
     save_to_file(outfile, df)
 
 
