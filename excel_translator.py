@@ -3,10 +3,11 @@ from functools import partial
 
 import deepl
 import fire
+import os
 import pandas as pd
 
 
-def translate_text(text, auth_key, target_language):
+def translate_text(text, auth_key, source_language, target_language):
     translator = deepl.Translator(auth_key)
     translation = translator.translate_text(text, target_lang=target_language)
     return translation.text
@@ -20,27 +21,35 @@ def save_to_file(save_path, df):
 
 ########################################################################################################################
 
-def translate_column(filepath, column_name, new_column_name, auth_key, target_language, outfile=None):
+def translate_column(file, column_name, new_column_name="Translations", auth_key=None, source_language=None,
+                     target_language="EN", outfile=None):
     if not outfile:
-        outfile = filepath
+        outfile = file
 
-    df = pd.read_excel(filepath)
-    print(df.head())
-    words = list(df[column_name].astype(str).unique())
-    print(f"unique words: {len(words)}")
+    if not auth_key:
+        try:
+            auth_key = os.environ['DEEPL_API_KEY']
+        except KeyError:
+            raise fire.core.FireError("No auth key provided.")
 
     translate_function = partial(
         translate_text,
         auth_key=auth_key,
+        source_language=source_language,
         target_language=target_language,
     )
 
-    with ThreadPoolExecutor(max_workers=100) as executor:
-        results = list(executor.map(translate_function, words))
+    df = pd.read_excel(file)
+    cells = list(df[column_name].astype(str).apply(lambda x: x.strip()).unique())
+    print(f"Unique cells: {len(cells)}")
 
-    translations = dict(zip(words, results))
+    with ThreadPoolExecutor(max_workers=100) as executor:
+        results = list(executor.map(translate_function, cells))
+
+    translations = dict(zip(cells, results))
     df[new_column_name] = df[column_name].map(translations)
     save_to_file(outfile, df)
+    print(f"Saved to {outfile}")
 
 
 ########################################################################################################################
