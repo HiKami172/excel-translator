@@ -40,7 +40,8 @@ Where:
 
 ### Optional Flags
 
-- `--auth_key`: DeepL API key. If not provided, uses DEEPL_API_KEY env variable
+- `--auth_key`: DeepL API key. If not provided, uses DEEPL_API_KEY env variable.
+- `--overwrite`: Substitute cells' values with translations. 
 - `--outfile`: Output file path. By default, the script will overwrite the original Excel file.
 - `--source_language`: Language code for the source language. If not provided, DeepL tries to detect it.
 - `--target_language`: Language code for the language you want to translate the text into. English by default
