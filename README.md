@@ -33,6 +33,10 @@ Signature:
 ```shell
 python excel_translator.py translate_column FILE COLUMN <flags>
 ```
+Example:
+```shell
+python excel_translator.py translate_column "path/to/file.xlsx" "Title" --target RU 
+```
 Where:
 - `FILE` is the path to Excel file.
 - `COLUMN` is the name of the column to translate.
@@ -43,7 +47,7 @@ Where:
 - `--auth_key`: DeepL API key. If not provided, uses DEEPL_API_KEY env variable.
 - `--overwrite`: Substitute cells' values with translations. 
 - `--outfile`: Output file path. By default, the script will overwrite the original Excel file.
-- `--source_language`: Language code for the source language. If not provided, DeepL tries to detect it.
-- `--target_language`: Language code for the language you want to translate the text into. English by default
+- `--source`: Language code for the source language. If not provided, DeepL tries to detect it.
+- `--target`: Language code for the language you want to translate the text into. English by default
 
 Language codes for DeepL API can be found here: https://www.deepl.com/docs-api/translate-text/
