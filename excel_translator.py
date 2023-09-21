@@ -55,8 +55,8 @@ def verify_auth_key(auth_key):
 
 ########################################################################################################################
 
-def translate_column(file, column, auth_key=None, source_language=None,
-                     target_language="EN", overwrite=False, outfile=None):
+def translate_column(file, column, auth_key=None, source=None,
+                     target="EN", overwrite=False, outfile=None):
     if not outfile:
         outfile = file
     auth_key = verify_auth_key(auth_key)
@@ -65,7 +65,7 @@ def translate_column(file, column, auth_key=None, source_language=None,
     values = list(df[column].astype(str).apply(lambda x: x.strip()).unique())
     print(f"Unique values: {len(values)}")
 
-    translations = translate_values(values, auth_key, source_language, target_language)
+    translations = translate_values(values, auth_key, source, target)
     new_column = column if overwrite else f"{column}_new"
     df[new_column] = df[column].map(translations)
 
@@ -73,8 +73,8 @@ def translate_column(file, column, auth_key=None, source_language=None,
     print(f"Saved to {outfile}")
 
 
-def translate_columns(file, *columns, auth_key=None, source_language=None,
-                      target_language="EN", overwrite=False, outfile=None):
+def translate_columns(file, *columns, auth_key=None, source=None,
+                      target="EN", overwrite=False, outfile=None):
     if not outfile:
         outfile = file
     auth_key = verify_auth_key(auth_key)
@@ -86,7 +86,7 @@ def translate_columns(file, *columns, auth_key=None, source_language=None,
         values.update(col_values)
     print(f"Unique values: {len(values)}")
 
-    translations = translate_values(values, auth_key, source_language, target_language)
+    translations = translate_values(values, auth_key, source, target)
     for column in columns:
         new_column = column if overwrite else f"{column}_new"
         df[new_column] = df[column].map(translations)
