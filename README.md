@@ -31,7 +31,7 @@ As an alternative, it can be specified as optional argument.
 
 Signature:
 ```shell
-python excel_translator.py translate_column FILE COLUMN <flags>
+python excel_translator.py <COMMAND> <ARGS> <FLAGS>
 ```
 Example:
 ```shell
