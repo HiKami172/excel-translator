@@ -22,18 +22,24 @@ export DEEPL_API_KEY = <key>
 The key can be found here: https://www.deepl.com/account/summary/ \
 As an alternative, it can be specified as optional argument.
 ## Usage
-To use the script, run the following command in your terminal:
+### Available Commands
+| Command             | Arguments             | Description                |
+|---------------------|-----------------------|----------------------------|
+| `translate_column`  | `FILE`<br/>`COLUMN`   | Translate one column.      |
+| `translate_columns` | `FILE`<br/>`*COLUMNS` | Translate several columns. |
+
+
+Signature:
 ```shell
-python excel_translator.py translate_column FILE COLUMN_NAME <flags>
+python excel_translator.py translate_column FILE COLUMN <flags>
 ```
 Where:
-- `FILE` is the path to Excel file.\
-- `COLUMN_NAME` is the name of the column to translate.
+- `FILE` is the path to Excel file.
+- `COLUMN` is the name of the column to translate.
+- `*COLUMNS` is several column names to translate.
 
 ### Optional Flags
 
-
-- `--new_column_name`: Name for the new column with translations.
 - `--auth_key`: DeepL API key. If not provided, uses DEEPL_API_KEY env variable
 - `--outfile`: Output file path. By default, the script will overwrite the original Excel file.
 - `--source_language`: Language code for the source language. If not provided, DeepL tries to detect it.
