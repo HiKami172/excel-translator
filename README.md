@@ -1,5 +1,5 @@
 # excel-translator
-CLI application for excel translation with deepl.
+CLI application for Excel translation with deepl.
 ## Clone Repository
 ```shell
 git clone git@github.com:HiKami172/excel-translator.git
